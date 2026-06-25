@@ -14,15 +14,15 @@ The stack reproduces a classic WordPress hosting setup:
 
 ```
                          ┌──────────────────────────────────────────────┐
-        HTTPS :443       │              inception-network (bridge)        │
-  client ───────────────►│  ┌─────────┐   :9000    ┌───────────┐         │
-                         │  │  NGINX  │───────────► │ WordPress │         │
-                         │  │  (TLS)  │  FastCGI    │ (PHP-FPM) │         │
-                         │  └─────────┘             └─────┬─────┘         │
-                         │                                │ :3306         │
-                         │                          ┌─────▼─────┐         │
-                         │                          │  MariaDB  │         │
-                         │                          └───────────┘         │
+        HTTPS :443       │              inception-network (bridge)      │
+  client ───────────────►│  ┌─────────┐   :9000     ┌───────────┐       │
+                         │  │  NGINX  │───────────► │ WordPress │       │
+                         │  │  (TLS)  │  FastCGI    │ (PHP-FPM) │       │
+                         │  └─────────┘             └─────┬─────┘       │
+                         │                                │ :3306       │
+                         │                          ┌─────▼─────┐       │
+                         │                          │  MariaDB  │       │
+                         │                          └───────────┘       │
                          └──────────────────────────────────────────────┘
 ```
 
@@ -225,12 +225,3 @@ for understanding the project. Specifically:
 - **Explaining concepts** — clarifying the differences covered in the comparisons
   above (VMs vs containers, secrets vs env vars, bridge vs host networking,
   volumes vs bind mounts) and how Docker namespaces, cgroups and Compose work.
-- **Reviewing configuration** — sanity-checking the `docker-compose.yml`,
-  Dockerfiles and NGINX/PHP-FPM configs for common mistakes (e.g. running the
-  service as PID 1, not using `latest` tags, exposing only the needed port).
-- **Debugging entrypoints** — reasoning about making the MariaDB and WordPress
-  initialization scripts idempotent and correctly resolving `*_FILE` secrets.
-- **Writing this README** — structuring and drafting the documentation.
-
-All design decisions were reviewed, understood and validated by the author before
-being committed.
